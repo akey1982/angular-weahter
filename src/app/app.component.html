@@ -1,12 +1,31 @@
-<div style="text-align: center;">
-<h1>
+<mat-toolbar color="primary" >local weather </mat-toolbar>
 
-  local weather
-</h1>
+<div fxLayoutAlign="center">
 
-<div>Your City, your forecast right now</div>
-
-<h2>current weather</h2>
-<app-current-weather></app-current-weather>
+  <div class="mat-caption">Your City, your forecast right now !</div>
 
 </div>
+
+<div fxLayout="row" fxLayoutAlign="center">
+
+  <app-city-search></app-city-search>
+
+</div>
+
+
+<div fxLayout="row" fxLayoutAlign="center">
+
+<mat-card fxFlex="300px">
+  <app-current-weather></app-current-weather>
+  <mat-card-title-group>
+    <mat-card-title >current weather</mat-card-title>
+  </mat-card-title-group>
+  <mat-card-content>
+  </mat-card-content>
+</mat-card>
+</div>
+
+<div fxLayout="colmumn" fxLayoutAlign="center">
+</div>
+
+

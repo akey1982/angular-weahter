@@ -10,17 +10,19 @@ import { WeatherService } from '../weather/weather.service';
 export class CurrentWeatherComponent implements OnInit {
 
 current: ICurrentWeather;
+today: number = Date.now();
+
+
 
   constructor(private weatherService: WeatherService) {
 
     this.current ={
 
-      city:'Nidderau',
-      country:'Deutschland',
-      date: 1000,
-      image: './assets/nidderau-hessen.png',
-      temp:72,
-      desc:'dort lebe ich '
+      city:'',
+      country:'',
+      image: '',
+      temp:0,
+      desc:''
 
     }
 
@@ -28,7 +30,8 @@ current: ICurrentWeather;
 
   ngOnInit(): void {
   
-  this.weatherService.getCurrentWeather('Munich','Germany').subscribe((data) => this.current = data)
+
+  this.weatherService.getCurrentWeather('Rabat','Morocco').subscribe((data) => this.current = data)
   
   }
 

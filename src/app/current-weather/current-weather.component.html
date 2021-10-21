@@ -1,29 +1,46 @@
-<div>
+<div *ngIf="!current">
 
-
-    <div><span>
-            {{current.city}},{{current.country}}
-
-        </span></div>
-
-
-    <div><span>
-            {{current.date}},{{current.country}}
-
-        </span></div>
+    no data
 
 </div>
 
 
-<div>
+<div *ngIf="current">
+
+    <div fxLayout="row">
+        <div fxFlex="66%">
+            {{current.city}},{{current.country}}
+        </div>
+
+        <div fxFlex>
+            {{today | date:'h:mm a z'}}
+        </div>
+
+    </div>
 
 
-    <div><span>
+    <div fxLayout="row">
 
-        temp
-            {{current.temp| number:'1.0-0'}}
-            {{current.desc}}
 
-        </span></div>
+        <div fxFlex="66%">
+
+            <img [src]='current.image' alt="">
+
+        </div>
+
+        <div fxFlex>
+
+            temperatur {{current.temp}}&#8451;
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+    {{current.desc}}
 
 </div>

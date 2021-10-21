@@ -40,19 +40,24 @@ export class WeatherService {
 
   
   
-  //
-  // getCurrentWeather(city:string, country:string){
- 
     
-    
-    
-    
-    // }
-    
-    
-    getCurrentWeather (city:string, country:string):Observable<ICurrentWeather>{
+    getCurrentWeather (search:string|number, country?:string):Observable<ICurrentWeather>{
+
+     let uriParams = new HttpParams();
       
-      const uriParams =  new HttpParams().set('q',`${city},${country}`).set('appid',environment.appId);
+      if(typeof search === "string"){
+
+        uriParams.set('q', country ? `${search},${country}`: search)
+
+
+      }else{
+
+
+        uriParams.set('zip',search)
+      }
+
+
+      uriParams.set('appid',environment.appId)
       
        return this.httpClient.get<ICurrentWeatherData>(`${environment.baseUrl}weather?`,{params:uriParams}).pipe(map((data) => this.transformTo(data)))
       
@@ -60,13 +65,10 @@ export class WeatherService {
 
  private transformTo(data:ICurrentWeatherData):ICurrentWeather{
 
-  console.log(data.weather[0].description)
-  console.log(data.name)
 
   return {
     city:data.name,
     country: data.sys.country,
-    date: data.dt*1000,
     image:`http://openweathermap.org/img/w/${data.weather[0].icon}.png`,
     temp:this.convertKelvinToFahrenheit(data.main.temp),
     desc:data.weather[0].description
@@ -77,7 +79,7 @@ export class WeatherService {
 }
 private convertKelvinToFahrenheit(kelvin:number ):number {
   
-  return kelvin * 9 /5 -459.67
+  return Math.round(kelvin -273.15)
 
 }
 
